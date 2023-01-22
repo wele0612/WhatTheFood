@@ -1,5 +1,5 @@
 # hwHacks2023
 
-To initialize the database:
+Mysql commands to initialize the database:
 
-'create database grocery;'
+`create database grocery;`
