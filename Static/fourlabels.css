@@ -1,22 +1,35 @@
+<style>
 
-body {
-    background-color: #3C4BA5;
-    color: black;
-    font-family: 'Montserrat Alternates', sans-serif;;
+.center {
+  text-align: center;
 }
-
-body {
-    margin: 10px;
-    padding: 0;
-    font-family: preconnect;
+html, body {
     background-color: #3C4BA5;
     color: white;
-    }
+    font-family: 'Montserrat Alternates', sans-serif;
+    margin: 10px;
+    padding: 0;
+    align-items: center;
+}
+
+.heading{
+  text-transform: uppercase;
+}
+
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+</style>
 
 .labels {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -52,41 +65,115 @@ body {
     margin: 20px auto;
 }
 
-
 .list {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: 80%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 10px 10px 0 0 rgba(0,0,0,0.2);
+  list-style: none;
+  overflow: hidden;
+  
+  .list-item {
     margin: 0;
     padding: 0;
-    width: 80%;
-    max-width: 500px;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 10px 10px 0 0 rgba(0,0,0,0.2);
-    list-style: none;
-    overflow: hidden;
+    border-bottom: 1px solid #ecf0f1;
+    position: relative;
     
-    .list-item {
-      margin: 0;
-      padding: 0;
-      border-bottom: 1px solid #ecf0f1;
-      position: relative;
-      
-      &:last-child {
-        border: 0;
-      }
+    &:last-child {
+      border: 0;
     }
   }
+}
+
+
+input[type="checkbox"] {
+  display: none;
+}
+      
   
-  // hide the checkbox
+  /* // hide the checkbox
   .hidden-box {
     position: absolute;
     top: -9999px;
     left: -9999px;
     appearance: none;
+    color: transparent;
     opacity: 0;
+  } */
+  
+
+  .check--label {
+    font-size: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
   }
   
+  .check--label-box {
+    display: flex;
+    align-self: center;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    margin: 0 20px;
+    border: 2px solid #3498db;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .check--label-text {
+    display: flex;
+    align-self: center;
+    position: relative;
+    cursor: pointer;
+    padding: 20px;
+    border-left: 1px solid #ecf0f1;
+    
+    &:after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background-color: #000;
+      position: absolute;
+      top: 50%;
+      left: 7.5%;
+      transform: translateY(-50%);
+      transition: width 100ms ease-in-out;
+    }
+  }
+  
+  // the magic
+  .hidden-box:checked + .check--label {
+    background-color: #F9F9F9;
+    .check--label-box {
+      background-color: #3498db;
+       &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -1px;
+        left: 4px;
+        width: 6px;
+        height: 12px;
+        border: solid #000;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+    .check--label-text {
+      &:after {
+        width: 85%;
+      }
+    }
+  }
   .check--label {
     font-size: 20px;
     margin: 0;
@@ -116,8 +203,9 @@ body {
     padding: 20px;
     color: black;
     border-left: 1px solid #ecf0f1;
+  
     
-    &:after {
+  &.after {
       content: '';
       display: block;
       width: 0%;
@@ -128,14 +216,18 @@ body {
       left: 7.5%;
       transform: translateY(-50%);
       transition: width 100ms ease-in-out;
-    }
-  }
+    }}
+  
   
   .hidden-box:checked + .check--label {
     background-color: #F9F9F9;
-    .check--label-box {
-      background-color: #3498db;
-       &:after {
+  }
+
+.check--label-box {
+      background-color: white;
+    
+
+ &.after {
         content: '';
         display: block;
         position: absolute;
@@ -146,14 +238,10 @@ body {
         border: solid #000;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
-      }
-    }
-    .check--label-text {
-      &:after {
-        width: 85%;
-      }
-    }
-  }
+      }}
+    
+
+
 
 
 .profile {
@@ -162,14 +250,17 @@ body {
 }
 
 .expire {
+    box-align: right;
     align-items: right;
+    align-self: right;
     position: absolute;
-    top: 100%;
-    left: 90%;
+    top: 95%;
+    left: 95%;
 }
 .warning {
     width: 50px;
     height: 50px;
+    align-items: right;
 }
 
 .delete {
@@ -177,11 +268,33 @@ body {
         margin: 0;
         padding: 0;
         width: 80%;
-        max-width: 500px;
-        background-color: #fff;
-        color: #1C2BA5;
+        max-width: 200px;
+        background-color: #f53329;
+        color: white;
+        align: center;
         border-radius: 6px;
         box-shadow: 10px 10px 0 0 rgba(0,0,0,0.2);
         list-style: none;
         overflow: hidden;   
 }
+
+
+##
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+
+/* // hide the checkbox
+.hidden-box {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  appearance: none;
+  opacity: 0;
+} */
+
