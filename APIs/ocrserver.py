@@ -26,7 +26,7 @@ def ocrImage():
     img_data = np.frombuffer(img_data, np.uint8)
     img_data=cv2.imdecode(img_data, cv2.IMREAD_COLOR)
     #print(img_data)
-    cv2.imwrite('img1.jpg', img_data)
+    #cv2.imwrite('img1.jpg', img_data)
 
     result = ocr.recognize_text(images=[img_data])
     textLines=result[0]["data"]
@@ -34,10 +34,11 @@ def ocrImage():
     for line in textLines:
         ocrtextList.append(line["text"])
 
-    outfile=open('result.json', mode = 'w',encoding='utf-8')
+    '''outfile=open('result.json', mode = 'w',encoding='utf-8')
     finaljson=json.dumps(ocrtextList)
     print(finaljson,file=outfile)
     outfile.close
+    '''
     #print(result,file=outfile)
 
     classlist=[]
