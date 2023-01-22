@@ -13,6 +13,7 @@ app = Flask(__name__)
 ocr = hub.Module(name="chinese_ocr_db_crnn_mobile", enable_mkldnn=True) 
 grocery.init()
 db.init()
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 @app.route('/')
 def hello_world():
@@ -69,10 +70,19 @@ def login():
     conn=db.getConnection()
     cursor=conn.cursor(pymysql.cursors.DictCursor)
 
-    resp = make_response("success")
-    resp.set_cookie("SESSDATA", user,max_age=36000)
+    sql = "SELECT * FROM users where username=%s and password=%s"
+    rows = cursor.execute(sql,(user,password))
+    if rows==1:
+        resp = make_response("success")
+        resp.set_cookie("SESSDATA", user,max_age=36000)
+    elif cursor.execute("SELECT * FROM users where username=%s",(user)):
+        resp = make_response("wrong password")
+    else:
+        resp = make_response("created")
+
     conn.close()
     return resp
+
 
 def checkAuth(sessdata:str):
     return "userName"
