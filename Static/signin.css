@@ -26,8 +26,8 @@ background: white;
 
 .box input[type="text"],.box input[type="password"]{
     border-radius: 24px;
-    border: 2px solid #3498db;
-    border: 2px solid #3498db;
+    border: 2px solid white;
+    border: 2px solid white;
     background: none;
     display: block;
     margin: 20px auto;
@@ -41,7 +41,7 @@ background: white;
 
 .box input[type="text"]:focus,.box input[type="password"]:focus{
     width: 280px;
-    border-color: #2ecc71;
+    border-color: #3498db;
 }
 
 .box input[type="submit"]{
@@ -49,7 +49,7 @@ background: white;
     border: 2px solid #2ecc71;
     background: none;
     display: block;
-    margin: 20px autiol
+    margin: 20px auto;
     text-align: center;
     padding: 14px 40px;
     outline: none;
