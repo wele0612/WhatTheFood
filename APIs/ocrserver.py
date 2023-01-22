@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask,request,make_response
 import json
 import paddlehub as hub
 import cv2
@@ -52,6 +52,23 @@ def ocrImage():
     print("Done.")
 
     return json.dumps({'code':0,'ocr_result':classlist})
+
+@app.route('/api/repository',methods=['POST'])
+@cross_origin()
+def updateRepository():
+    return "Funciton not complete"
+
+@app.route('/api/login',methods=["POST"])
+@cross_origin()
+def login():
+    user = request.form['user']
+    password = request.form['password']
+    resp = make_response("success")
+    resp.set_cookie("SESSDATA", user,max_age=36000)
+    return resp
+
+def checkAuth(sessdata:str):
+    return "userName"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
