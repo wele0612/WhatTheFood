@@ -9,6 +9,7 @@ html, body {
     font-family: 'Montserrat Alternates', sans-serif;
     margin: 10px;
     padding: 0;
+    align-items: center;
 }
 
 .heading{
@@ -28,7 +29,7 @@ html, body {
 .labels {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -250,6 +251,8 @@ input[type="checkbox"] {
 
 .expire {
     box-align: right;
+    align-items: right;
+    align-self: right;
     position: absolute;
     top: 95%;
     left: 95%;
@@ -257,6 +260,7 @@ input[type="checkbox"] {
 .warning {
     width: 50px;
     height: 50px;
+    align-items: right;
 }
 
 .delete {
