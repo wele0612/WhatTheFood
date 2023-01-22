@@ -2,7 +2,7 @@ styles.css> body
 body {
 margin: 0;
 padding: 0;
-font-family: sana-fserif;
+font-family: preconnect;
 background: white;
 }
 
@@ -21,7 +21,7 @@ background: white;
 .box h1{
     color: white;
     text-transform: uppercase;
-    font-weight; 500;
+    font-weight: 500;
 }
 
 .box input[type="text"],.box input[type="password"]{
