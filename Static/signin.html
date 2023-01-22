@@ -5,17 +5,49 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+        </script>
+        <script>
+            function login(){
+                var username=document.forms["userinfo"]["username"].value
+                var password=document.forms["userinfo"]["password"].value
+                
+                console.log(username+password)
+                if((username == null || username == "" )||(password == null || password == "")){
+                    alert("Please fill in all informations");
+                    return
+                }
+                $.post("http://nwhacks.ltyxh.com/api/login",{
+                    user:username,
+                    password:password
+                },
+                function(data,status){
+                    alert("数据: \n" + data + "\n状态: " + status);
+                    if(data=="created" || data=="success"){
+                        window.location.replace("http://nwhacks.ltyxh.com/api/login");
+                    }
+                }
+                )
+            }
+        </script>
     </head>
 
     <body>
-        <form class="box" action="Login.html" method="POST">
-            <h1>
-            Login
-            </h1>
-            <input type="text" name="" placeholder="Username">
-            <input type="password" name="" placeholder="password">
-            <input type="submit" name="" value="Login">
-        </form>
+        <div class="msg_desc">
+            <img style="max-width:100%;overflow:hidden;" src="grocery_background.jpg" alt="">
+        </div>
+        
+        <div class="boxbg">
+            <form name="userinfo" class="box">
+                <h1>
+                Login
+                </h1>
+                <input type="text" name="username" placeholder="username" required="required">
+                <input type="password" name="password" placeholder="password" required="required">
+                
+            </form>
+            <button class="button" onclick="login()">submit</button>
+        </div>
     </body>
     
 </html>

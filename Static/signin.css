@@ -6,13 +6,18 @@ font-family: preconnect;
 background: white;
 }
 
-.box{
+.boxbg{
     width: 300px;
     padding: 40px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: #3C4BA5;
+}
+
+.box{
+   
     background: #3C4BA5;
     text-align: center;
 
@@ -45,6 +50,20 @@ background: white;
 }
 
 .box input[type="submit"]{
+    border-radius: 24px;
+    border: 2px solid #2ecc71;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.button{
     border-radius: 24px;
     border: 2px solid #2ecc71;
     background: none;
