@@ -3,6 +3,7 @@ import json
 import pymysql
 import dbconnection as db
 import paddlehub as hub
+import random
 import cv2
 import base64
 import numpy as np
@@ -14,6 +15,18 @@ ocr = hub.Module(name="chinese_ocr_db_crnn_mobile", enable_mkldnn=True)
 grocery.init()
 db.init()
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+def checkAuth(sessdata:str,username:str):
+    if sessdata==None:
+        return False
+    conn=db.getConnection()
+    cursor=conn.cursor(pymysql.cursors.DictCursor)
+
+    sql = "SELECT * FROM users where sessdata=%s and username=%s"
+    rows = cursor.execute(sql,(sessdata,username))
+    conn.close()
+
+    return rows==1
 
 @app.route('/')
 def hello_world():
@@ -65,27 +78,42 @@ def updateRepository():
 @app.route('/api/login',methods=["POST"])
 @cross_origin()
 def login():
+
     user = request.form['user']
     password = request.form['password']
+
+    if checkAuth(request.cookies.get("SESSDATA"),user):
+        return "success"
     conn=db.getConnection()
     cursor=conn.cursor(pymysql.cursors.DictCursor)
 
     sql = "SELECT * FROM users where username=%s and password=%s"
     rows = cursor.execute(sql,(user,password))
-    if rows==1:
+
+    alphabet = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()'
+    randstr = random.sample(alphabet, 20)
+    sessdata=""
+    for c in randstr:
+        sessdata=sessdata+c
+    #print(sessdata)
+
+    if rows==1:#密码正确
         resp = make_response("success")
-        resp.set_cookie("SESSDATA", user,max_age=36000)
-    elif cursor.execute("SELECT * FROM users where username=%s",(user)):
+        sql = "UPDATE users SET sessdata=%s where username=%s"
+        rows = cursor.execute(sql,(sessdata,user))
+
+        resp.set_cookie("SESSDATA",sessdata,max_age=36000)
+    elif cursor.execute("SELECT * FROM users where username=%s",(user))==1:#密码错误
         resp = make_response("wrong password")
-    else:
+    else:#新用户
+        print("newuser")
+        sql = "INSERT INTO users (username,password,sessdata,grocery) VALUES (%s,%s,%s,%s)"
+        cursor.execute(sql,(user,password,sessdata,""))
         resp = make_response("created")
+        resp.set_cookie("SESSDATA",sessdata,max_age=36000)
 
     conn.close()
     return resp
-
-
-def checkAuth(sessdata:str):
-    return "userName"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
