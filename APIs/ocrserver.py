@@ -1,4 +1,4 @@
-from flask import Flask,request,make_response
+from flask import Flask,request,make_response,send_from_directory,render_template
 import json
 import pymysql
 import dbconnection as db
@@ -10,7 +10,9 @@ import numpy as np
 from flask_cors import cross_origin
 import grocery
 
-app = Flask(__name__)
+absolutpath="D:\\Other projects\\NWH2023\\hwHacks2023\\Static\\"
+
+app = Flask(__name__,static_url_path='/static/')
 ocr = hub.Module(name="chinese_ocr_db_crnn_mobile", enable_mkldnn=True) 
 grocery.init()
 db.init()
@@ -27,6 +29,11 @@ def checkAuth(sessdata:str,username:str):
     conn.close()
 
     return rows==1
+
+@app.route('/static/',methods=["GET","POST"])
+def send_login():
+    print("login")
+    return send_from_directory('','signin.html') 
 
 @app.route('/')
 def hello_world():
