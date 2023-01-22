@@ -11,7 +11,8 @@
             function login(){
                 var username=document.forms["userinfo"]["username"].value
                 var password=document.forms["userinfo"]["password"].value
-                
+                var absolutpath="file:///D:/Other projects/NWH2023/hwHacks2023/Static/";
+
                 console.log(username+password)
                 if((username == null || username == "" )||(password == null || password == "")){
                     alert("Please fill in all informations");
@@ -22,10 +23,10 @@
                     password:password
                 },
                 function(data,status){
-                    alert("数据: \n" + data + "\n状态: " + status);
                     if(data=="created" || data=="success"){
-                        window.location.replace("http://nwhacks.ltyxh.com/api/login");
+                        window.location.replace(absolutpath+"page2.html");
                     }
+                    alert("\n" + data + "\ncode: " + status);
                 }
                 )
             }
