@@ -69,11 +69,54 @@ def ocrImage():
     print("Done.")
 
     return json.dumps({'code':0,'ocr_result':classlist})
+'''
+@app.route('/api/get-repository',methods=['POST','GET'])
+@cross_origin
+def getRepository():
+    print("hey")
+    return "failed"
 
-@app.route('/api/repository',methods=['POST'])
+    sessdata=request.cookies.get("SESSDATA")
+    if sessdata==None:
+        return "login failed."
+    conn=db.getConnection()
+    cursor=conn.cursor(pymysql.cursors.DictCursor)
+
+    sql = "SELECT grocery FROM users where sessdata=%s"
+    rows = cursor.execute(sql,(sessdata))
+
+    if rows==0:
+        conn.close()
+        return "login failed."
+    record=cursor.fetchone()
+    conn.close()
+    return json.dumps(record[0])
+'''
+@app.route('/api/set-repository',methods=['POST'])
 @cross_origin()
-def updateRepository():
-    return "Funciton not complete"
+def setRepository():
+    sessdata=request.cookies.get("SESSDATA")
+    if sessdata==None:
+        return "login failed."
+    conn=db.getConnection()
+    cursor=conn.cursor(pymysql.cursors.DictCursor)
+
+    sql = "SELECT grocery FROM users where sessdata=%s"
+    rows = cursor.execute(sql,(sessdata))
+
+    if rows==0:
+        conn.close()
+        return "login failed."
+    
+    record=cursor.fetchone()
+
+    action = request.args.get('action')
+    if action == "set":
+        #resp = make_response(json.dumps(record[0]))
+        sql = "UPDATE users SET grocery=%s where sessdata=%s"
+        rows = cursor.execute(sql,(request.form.get("grocery"),sessdata))
+    print(record)
+    return json.dumps(record["grocery"])
 
 @app.route('/api/login',methods=["POST"])
 @cross_origin()
