@@ -16,6 +16,18 @@ grocery.init()
 db.init()
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
+def checkAuth(sessdata:str,username:str):
+    if sessdata==None:
+        return False
+    conn=db.getConnection()
+    cursor=conn.cursor(pymysql.cursors.DictCursor)
+
+    sql = "SELECT * FROM users where sessdata=%s and username=%s"
+    rows = cursor.execute(sql,(sessdata,username))
+    conn.close()
+
+    return rows==1
+
 @app.route('/')
 def hello_world():
     return 'OCR server running.'
@@ -66,8 +78,12 @@ def updateRepository():
 @app.route('/api/login',methods=["POST"])
 @cross_origin()
 def login():
+
     user = request.form['user']
     password = request.form['password']
+
+    if checkAuth(request.cookies.get("SESSDATA"),user):
+        return "success"
     conn=db.getConnection()
     cursor=conn.cursor(pymysql.cursors.DictCursor)
 
@@ -79,7 +95,7 @@ def login():
     sessdata=""
     for c in randstr:
         sessdata=sessdata+c
-    print(sessdata)
+    #print(sessdata)
 
     if rows==1:#密码正确
         resp = make_response("success")
@@ -90,7 +106,7 @@ def login():
     elif cursor.execute("SELECT * FROM users where username=%s",(user))==1:#密码错误
         resp = make_response("wrong password")
     else:#新用户
-        #print("newuser")
+        print("newuser")
         sql = "INSERT INTO users (username,password,sessdata,grocery) VALUES (%s,%s,%s,%s)"
         cursor.execute(sql,(user,password,sessdata,""))
         resp = make_response("created")
@@ -98,10 +114,6 @@ def login():
 
     conn.close()
     return resp
-
-
-def checkAuth(sessdata:str):
-    return "userName"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
