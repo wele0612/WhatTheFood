@@ -1,7 +1,7 @@
 import csv
 import re
  
-filename='grocery_class.csv'
+filename='./APIs/grocery_class.csv'
 data = []
 
 def standardlize(name:str):
