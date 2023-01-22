@@ -1,5 +1,7 @@
 from flask import Flask,request,make_response
 import json
+import pymysql
+import dbconnection as db
 import paddlehub as hub
 import cv2
 import base64
@@ -10,6 +12,7 @@ import grocery
 app = Flask(__name__)
 ocr = hub.Module(name="chinese_ocr_db_crnn_mobile", enable_mkldnn=True) 
 grocery.init()
+db.init()
 
 @app.route('/')
 def hello_world():
@@ -63,8 +66,12 @@ def updateRepository():
 def login():
     user = request.form['user']
     password = request.form['password']
+    conn=db.getConnection()
+    cursor=conn.cursor(pymysql.cursors.DictCursor)
+
     resp = make_response("success")
     resp.set_cookie("SESSDATA", user,max_age=36000)
+    conn.close()
     return resp
 
 def checkAuth(sessdata:str):
