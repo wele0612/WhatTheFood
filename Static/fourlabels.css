@@ -3,7 +3,7 @@
 .center {
   text-align: center;
 }
-body {
+html, body {
     background-color: #3C4BA5;
     color: white;
     font-family: 'Montserrat Alternates', sans-serif;
@@ -64,34 +64,38 @@ body {
     margin: 20px auto;
 }
 
-
 .list {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    width: 80%;
-    max-width: 500px;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 10px 10px 0 0 rgba(0,0,0,0.2);
-    list-style: none;
-    overflow: hidden;
-}
-    
-.list-item {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid #ecf0f1;
-  position: relative;
+  width: 80%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 10px 10px 0 0 rgba(0,0,0,0.2);
+  list-style: none;
+  overflow: hidden;
+  
+  .list-item {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ecf0f1;
+    position: relative;
+    
+    &:last-child {
+      border: 0;
+    }
+  }
+}
+
+
+input[type="checkbox"] {
+  display: none;
 }
       
-.last-child {
-        border: 0;
-      }
-    
   
-  // hide the checkbox
+  /* // hide the checkbox
   .hidden-box {
     position: absolute;
     top: -9999px;
@@ -99,8 +103,76 @@ body {
     appearance: none;
     color: transparent;
     opacity: 0;
+  } */
+  
+
+  .check--label {
+    font-size: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
   }
   
+  .check--label-box {
+    display: flex;
+    align-self: center;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    margin: 0 20px;
+    border: 2px solid #3498db;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .check--label-text {
+    display: flex;
+    align-self: center;
+    position: relative;
+    cursor: pointer;
+    padding: 20px;
+    border-left: 1px solid #ecf0f1;
+    
+    &:after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background-color: #000;
+      position: absolute;
+      top: 50%;
+      left: 7.5%;
+      transform: translateY(-50%);
+      transition: width 100ms ease-in-out;
+    }
+  }
+  
+  // the magic
+  .hidden-box:checked + .check--label {
+    background-color: #F9F9F9;
+    .check--label-box {
+      background-color: #3498db;
+       &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -1px;
+        left: 4px;
+        width: 6px;
+        height: 12px;
+        border: solid #000;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+    .check--label-text {
+      &:after {
+        width: 85%;
+      }
+    }
+  }
   .check--label {
     font-size: 20px;
     margin: 0;
@@ -130,9 +202,9 @@ body {
     padding: 20px;
     color: black;
     border-left: 1px solid #ecf0f1;
-  }
+  
     
-.after {
+  &.after {
       content: '';
       display: block;
       width: 0%;
@@ -143,7 +215,7 @@ body {
       left: 7.5%;
       transform: translateY(-50%);
       transition: width 100ms ease-in-out;
-    }
+    }}
   
   
   .hidden-box:checked + .check--label {
@@ -152,9 +224,9 @@ body {
 
 .check--label-box {
       background-color: white;
-    }
+    
 
-.after {
+ &.after {
         content: '';
         display: block;
         position: absolute;
@@ -165,7 +237,7 @@ body {
         border: solid #000;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
-      }
+      }}
     
 
 
@@ -204,135 +276,21 @@ body {
 
 
 ##
-html {
-  height: 100%; // for styling only
+
+
+* {
+  box-sizing: border-box;
 }
 
 
-.exp {
-  display: table; // to center the item
-  width: 100%;
-  height: 100%;
-  
-  .checkbox {
-    display: table-cell; // to center the item
-    width: 100%;
-    height: 100%;
-    vertical-align: middle; // to center the item
-    text-align: center; // to center the item
-  }
-}
 
-label {
-    display: inline-block; // to make it easier to click
-    color: #fff;
-    cursor: pointer;
-    position: relative; // important
-  
-    // Now we'll create the checkbox object
-  
-    span {
-      display: inline-block;
-      position: relative;
-      background-color: transparent;
-      width: 25px;
-      height: 25px;
-      transform-origin: center;
-      border: 2px solid #fff;
-      border-radius: 50%;
-      vertical-align: -6px;
-      margin-right: 10px;
-      transition: background-color 150ms 200ms, transform 350ms cubic-bezier(.78,-1.22,.17,1.89); // custom ease effect for bouncy animation
-  
-  // Now we'll create the "tick" using pseudo elements - those will be basically two lines that will be rotated to form the "tick"
-  
-    &:before {
-      content: "";
-      width: 0px;
-      height: 2px;
-      border-radius: 2px; // so that the tick has nice rounded look
-      background: #fff;
-      position: absolute;
-      transform: rotate(45deg);
-      top: 13px; // you'll need to experiment with placement depending on the dimensions you've chosen
-      left: 9px; // you'll need to experiment with placement depending on the dimensions you've chosen
-      transition: width 50ms ease 50ms;
-      transform-origin: 0% 0%;
-    }
-  
-    &:after {
-      content: "";
-      width: 0;
-      height: 2px;
-      border-radius: 2px; // so that the tick has nice rounded look
-      background: #fff;
-      position: absolute;
-      transform: rotate(305deg);
-      top: 16px; // you'll need to experiment with placement depending on the dimensions you've chosen
-      left: 10px; // you'll need to experiment with placement depending on the dimensions you've chosen
-      transition: width 50ms ease;
-      transform-origin: 0% 0%;
-    }
-  }
-  // Time to add some life to it
-  
-  &:hover {
-    span {
-      &:before {
-        width: 5px;
-        transition: width 100ms ease;
-      }
-      
-      &:after {
-        width: 10px;
-        transition: width 150ms ease 100ms;
-      }
-    }
-  }
-}
 
-input[type="checkbox"] {
-    display: none; // hide the system checkbox
-  
-  // Let's add some effects after the checkbox is checked
-  
-  &:checked {
-    + label {
-      span {
-        background-color: #fff;
-        transform: scale(1.25); // enlarge the box
-        
-        &:after {
-          width: 10px;
-          background: #1790b5;
-          transition: width 150ms ease 100ms; // enlarge the tick
-        }
-        
-        &:before {
-          width: 5px;
-          background: #1790b5;
-          transition: width 150ms ease 100ms; // enlarge the tick
-        }
-      }
-      
-      &:hover { // copy the states for onMouseOver to avoid flickering
-        span {
-          background-color: #fff;
-          transform: scale(1.25); // enlarge the box
+/* // hide the checkbox
+.hidden-box {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  appearance: none;
+  opacity: 0;
+} */
 
-          &:after {
-            width: 10px;
-            background: #1790b5;
-            transition: width 150ms ease 100ms; // enlarge the tick
-          }
-
-          &:before {
-            width: 5px;
-            background: #1790b5;
-            transition: width 150ms ease 100ms; // enlarge the tick
-          }
-        }  
-      }
-    }
-  }
-}
