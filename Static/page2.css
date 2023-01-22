@@ -1,8 +1,24 @@
 .center {
   text-align: center;
 }
+html, body{
+  background-color: #3C4BA5;
+  color: white;
+  font-family: 'Montserrat Alternates', sans-serif;
+
+}
 
 .container {
   display: flex;
   justify-content: space-around;
-}
+  height: 100%;
+  align-items: bottom;
+  align-content: bottom;
+  }
+
+  .profile {
+    display: inline-block;
+    align-self: flex-end;
+  }
+
+
