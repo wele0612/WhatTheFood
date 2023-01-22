@@ -1,0 +1,57 @@
+
+body {
+    background-color: #3498db;
+    color: black;
+    font-family: "Coming Soon";
+}
+
+.labels {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.cell {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin: 30px 0 30px 0;
+}
+.todo {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+li {
+    margin: 20px;
+    font-size: 25px;
+}
+
+
+.profile {
+    width: 25px;
+    height: 25px;
+}
+
+.expire {
+    align-items: right;
+    position: absolute;
+    top: 100%;
+    left: 90%;
+}
+.warning {
+    width: 50px;
+    height: 50px;
+}
