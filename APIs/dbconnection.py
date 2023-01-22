@@ -9,7 +9,7 @@ def init():
 def getConnection():
     with open('./apis/dbcommand.dbinfo',"r") as f:    
         dbpassword = f.read()
-    print("password:"+dbpassword)
+    #print("password:"+dbpassword)
     conn=pymysql.connect(host= '127.0.0.1', port=3306, user= 'root', password= dbpassword, db= 'grocery', charset = 'utf8', autocommit = True)
     return conn
 
