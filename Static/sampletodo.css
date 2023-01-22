@@ -1,0 +1,80 @@
+
+styles.css> body
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    background-color: #3C4BA5;
+    color: white;
+    font-family: "Coming Soon";
+}
+h1 {
+    margin: 20px auto;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+}
+
+.content {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+
+.box {
+    width: 100%;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #FF6600;
+}
+
+.box>span {
+    float: left;
+    margin-left: 5px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.box>input {
+    float: right;
+    width: 88%;
+    height: 28px;
+    border: none;
+    outline: none;
+}
+
+.box2 {
+    width: 100%;
+}
+
+.box2>#list>.item {
+    width: 100%;
+    height: 30px;
+    color: snow;
+    background-color: rgba(248, 165, 42, 0.6);
+    border: 1px solid #fff;
+}
+
+.box2>ul>.item>.infor {
+    display: inline;
+    margin-left: 15px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.box2>ul>.item>.del {
+    float: right;
+    margin-right: 10px;
+    font-size: 20px;
+    line-height: 30px;
+    user-select: none;
+}
+
+.change {
+    display: none;
+}
+
+
