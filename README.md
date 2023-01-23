@@ -1,8 +1,4 @@
-# nwHacks2023
-
-To Save Food, Start With You. Join Us With Project - !What The Food
-
-There is 1260 billion CAD worth of food waste annually, and have you ever stockpiled lots of items or bought redundant groceries and left it to rot and stink in the fridge?
+# Whaat the Food
 
 ! What The Food is a unique software that helps users manage the refrigerator with a quick to access interface that can scan in grocery items conveniently to control food wastes by resolving the previously mentioned two issues. 
 
