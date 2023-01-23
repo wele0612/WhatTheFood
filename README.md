@@ -1,4 +1,4 @@
-# Whaat the Food
+# What the Food
 
 ! What The Food is a unique software that helps users manage the refrigerator with a quick to access interface that can scan in grocery items conveniently to control food wastes by resolving the previously mentioned two issues. 
 
