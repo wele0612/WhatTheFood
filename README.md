@@ -1,5 +1,7 @@
 # What the Food
 
+基于Paddlepaddle机器学习OCR和朴素贝叶斯分类算法的生鲜管理工具。
+
 ! What The Food is a unique software that helps users manage the refrigerator with a quick to access interface that can scan in grocery items conveniently to control food wastes by resolving the previously mentioned two issues. 
 
 The software is designed through a uniquely developed backend API based on paddlehub’s machine learning ocr and has an extremely large database using mysql that sufficiently picks up keywords in your grocery receipts. A machine learning approach using naive bayes to categorize items not censored in the database is also implemented to improve user experience in the long term. 
