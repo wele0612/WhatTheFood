@@ -6,6 +6,8 @@
 
 The software is designed through a uniquely developed backend API based on paddlehub’s machine learning ocr and has an extremely large database using mysql that sufficiently picks up keywords in your grocery receipts. A machine learning approach using Naive Bayes in Python Pandas to categorize items not censored in the database is also implemented to improve user experience in the long term. 
 
+A brief overview of the project can be found here: https://www.canva.com/design/DAFYY0q5kos/SjeG_NZowEnY_FXoPiH1Pg/edit?utm_content=DAFYY0q5kos&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton .
+
 We truly believe that small changes on a personal level can help the world move towards a better future. Project - ! What The Food is here for you.
 
 ______
