@@ -1,5 +1,7 @@
 # What the Food
 
+A grocery management application based on PaddlePaddle, OCR and machine learning using Naive Bayes Algorithm.
+
 基于Paddlepaddle机器学习OCR和朴素贝叶斯分类算法的生鲜管理工具。
 
 ! What The Food is a unique software that helps users manage the refrigerator with a quick to access interface that can scan in grocery items conveniently to control food wastes by resolving the previously mentioned two issues. 
